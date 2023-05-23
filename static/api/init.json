@@ -1,0 +1,61 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "/yly"
+  },
+  "logoInfo": {
+    "title": "康养系统",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "href": "",
+      "target": "_self",
+      "title": "数据分析",
+      "child": [
+        {
+          "title": "养老院",
+          "href": "/yly",
+          "target": "_self"
+        },
+        {
+          "title": "景点",
+          "href": "/nvyou",
+          "target": "_self"
+        },
+        {
+          "title": "美容养生",
+          "href": "/mrys",
+          "target": "_self"
+        },
+        {
+          "title": "数据分析",
+          "href": "/sjfx",
+          "target": "_self"
+        },
+        {
+          "title": "我的收藏",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "收藏景点",
+              "href": "my_jd",
+              "target": "_self"
+            },
+            {
+              "title": "收藏养老院",
+              "href": "my_yly",
+              "target": "_self"
+            },
+            {
+              "title": "收藏美容养生",
+              "href": "my_mrys",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

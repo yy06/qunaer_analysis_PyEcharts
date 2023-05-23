@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../../static/css/uiduck.css" type="text/css" rel="stylesheet">
+    <link href="../../static/css/table.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div style="width: 80%;padding: 0 10%;">
+
+    <!--以下为两个必须div元素-->
+    <script type="text/html" id="barDemo">
+        <button class="uiduck-btn" onClick=getRow(this);>收藏数据</button>
+    </script>
+    <div id="ud-top">
+        <input id="search" ud-keyWord="wechat" class="uiduck-input"/>
+        <button class="uiduck-btn"
+                onClick=search();>搜索
+        </button>
+    </div>
+
+    <div id="table"></div>
+</div>
+</body>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script language="Javascript" src="../../static/js/json2.js"></script>
+<script language="Javascript" src="../../static/js/uiduck.js"></script>
+<script LANGUAGE="javascript">
+    $("#ud-top").css('display');
+    setData();
+
+    function setData() {
+        uiduck.setOptions({
+            templateId: "table",
+            style: {size: "mini", stripe: false, highlight: true, tbClass: "uiduck-table"},
+            topBar: {templateId: "search", kwLight: true},
+            rightTool: {templateId: "barDemo", title: "操作", width: "100px"},
+            page: true,
+            fieldOptions: [
+                {
+                    key: "id",
+                    title: "序号",
+                    visible: false
+                },
+                {
+                    key: "img",
+                    title: "图片",
+                    type: "image",
+                    width: "50px",
+                    height: "50px",
+                }, {
+                    key: "name",
+                    title: "名称"
+                }, {
+                    key: "type",
+                    title: "城市"
+                }, {
+                    key: "local",
+                    title: "地址"
+                }, {
+                    key: "url",
+                    title: "网址"
+                }]
+        });
+        var data = [
+            {% for i in data %}
+                {
+                    "id": {{ i[0] }},
+                    "img": "{{ i[3] }}",
+                    "name": "{{ i[1] }}",
+                    "type": "{{ i[4] }}",
+                    "local": "{{ i[5] }}",
+                    "url": '<a target="_blank" href={{ i[2] }}>点击查看</a>'
+                },
+            {% endfor %}
+        ]
+        uiduck.setData(data, false);
+    }
+
+    function getRow(e) {
+        var data = JSON.stringify(uiduck.getRow(e))
+        $.ajax({
+            type: "post",
+            data: {'data': data, 'userid': localStorage.getItem('userid')},
+            url: '/sc_jd',
+            success: function (e) {
+                alert(e)
+            }
+        })
+    }
+
+    function search() {
+        var word = document.getElementById('search').value
+        location.href = 'nvyou1?word=' + word
+    }
+</script>
+
+</html>

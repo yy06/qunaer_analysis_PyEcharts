@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户注册</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+    <link rel="stylesheet" href="../../static/js/lay-module/step-lay/step.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <div class="layui-fluid">
+            <div class="layui-card">
+                <div class="layui-card-body" style="padding-top: 40px;">
+                    <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto;">
+                        <div carousel-item>
+                            <div>
+                                <form id = "register" class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;"
+                                      action="/register" method="post">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">账号:</label>
+                                        <div class="layui-input-block">
+                                            <input name="id" placeholder="请填写用户账号" class="layui-input" required/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">昵称:</label>
+                                        <div class="layui-input-block">
+                                            <input name="username" placeholder="请填写您的用户昵称" class="layui-input"
+                                                   lay-verify="text" required/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">性别:</label>
+                                        <div class="layui-input-block">
+                                            <input name="sex" placeholder="请填写性别" class="layui-input" lay-verify="text"
+                                                   required/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">年龄:</label>
+                                        <div class="layui-input-block">
+                                            <input name="age" placeholder="请填写您的实际年龄" class="layui-input"
+                                                   lay-verify="text" required/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">密码:</label>
+                                        <div class="layui-input-block">
+                                            <input name="password" placeholder="请填写密码" class="layui-input"
+                                                   lay-verify="text" required/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button type="submit" class="layui-btn" lay-submit lay-filter="formStep">
+                                                注册
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="../../static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="../../static/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="../../static/js/jquery.form.js"></script>
+<script>
+    layui.use(['form', 'step'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            step = layui.step;
+
+        step.render({
+            elem: '#stepForm',
+            filter: 'stepForm',
+            width: '100%', //设置容器宽度
+            height: '500px',
+            stepItems: [{
+                title: '填写基本信息'
+            }]
+        });
+
+    });
+        $("#register").ajaxForm(function (data) {
+        if (data === 'true') {
+            alert("注册成功");
+            window.location.href = '/'
+        }else {
+            alert(data)
+            location.reload()
+        }
+    });
+</script>
+</body>
+</html>
